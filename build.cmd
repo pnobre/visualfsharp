@@ -686,6 +686,10 @@ if not "%SIGN_TYPE%" == "" (
 echo ---------------- Done with signing, building insertion files ---------------
 
 if "%BUILD_SETUP%" == "1" (
+    echo %_msbuildexe% %msbuildflags% setup\fsharp-setup-build.proj /p:Configuration=%BUILD_CONFIG%
+         %_msbuildexe% %msbuildflags% setup\fsharp-setup-build.proj /p:Configuration=%BUILD_CONFIG%
+    if ERRORLEVEL 1 echo Error building setup projects && goto :failure
+
     echo %_msbuildexe% %msbuildflags% setup\Swix\Microsoft.FSharp.vsmanproj /p:Configuration=%BUILD_CONFIG%
          %_msbuildexe% %msbuildflags% setup\Swix\Microsoft.FSharp.vsmanproj /p:Configuration=%BUILD_CONFIG%
     if ERRORLEVEL 1 echo Error building .vsmanproj && goto :failure
